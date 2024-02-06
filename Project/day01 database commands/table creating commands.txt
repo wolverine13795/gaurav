@@ -1,0 +1,30 @@
+login : 
+mysql -uroot -proot
+
+creating database for project:
+create database project_00v;
+
+use project_00v;
+
+creating tables:
+create table cat_mast(catmaster_id int primary key auto_increment,cat_id char(3),subcat_id char(3),cat_name varchar(255),cat_image_path varchar(255),flag boolean);
+
+CREATE TABLE prod_mast (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    Product_Short_Desc VARCHAR(500),
+    Product_Long_Desc VARCHAR(1500),
+    MRP INT,
+    Cardholder_Price INT,
+    Points_to_redeem INT,
+    catmaster_id int,
+    FOREIGN KEY (catmaster_id) REFERENCES cat_mast(catmaster_id)
+);
+
+
+create table Config_mast(config_id int primary key auto_increment,config_name varchar(255));
+
+create table prod_dtl_mast(
+prod_dtl_id int primary key auto_increment,
+product_id int,config_id int,config_dtls varchar(100),foreign key (product_id) references prod_mast(product_id),foreign key (config_id) references config_mast(config_id)); 
+
+
